@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>DzLink</title>
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#006633">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { background-color: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
+    .mobile-container { width: 100%; max-width: 414px; height: 100vh; max-height: 896px; background: #1e293b; position: relative; overflow-y: auto; display: flex; flex-direction: column; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+    .screen { display: none; flex-direction: column; height: 100%; padding: 24px; justify-content: space-between; animation: fadeIn 0.3s ease-in-out; }
+    .screen.active { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .brand-green { color: #10b981; }
+    .btn-primary { background: #059669; color: white; border: none; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: bold; width: 100%; cursor: pointer; transition: 0.2s; text-align: center; }
+    .btn-primary:active { transform: scale(0.98); background: #047857; }
+    .btn-outline { background: transparent; color: #94a3b8; border: 1px solid #475569; padding: 14px; border-radius: 12px; font-size: 15px; width: 100%; cursor: pointer; text-align: center; }
+    .btn-danger { background: #dc2626; color: white; border: none; padding: 14px; border-radius: 12px; font-weight: bold; width: 100%; cursor: pointer; }
+    .card { background: #334155; border-radius: 16px; padding: 20px; border: 1px solid #475569; margin-bottom: 16px; }
+    .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+    .status-inactive { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+    .status-active { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .power-btn { width: 110px; height: 110px; border-radius: 50%; border: 4px solid #475569; background: #1e293b; color: #64748b; font-size: 36px; display: flex; justify-content: center; align-items: center; margin: 20px auto; cursor: pointer; transition: 0.3s; box-shadow: 0 0 20px rgba(0,0,0,0.3); }
+    .power-btn.active { border-color: #10b981; color: #10b981; box-shadow: 0 0 30px rgba(16, 185, 129, 0.4); }
+    .grid-apps { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+    .app-item { background: #334155; border-radius: 12px; padding: 16px; text-align: center; border: 1px solid #475569; cursor: pointer; transition: 0.2s; }
+    .app-item:active { background: #475569; }
+    .app-icon { font-size: 28px; margin-bottom: 8px; }
+    .scanner-box { width: 100%; height: 200px; border: 2px dashed #10b981; border-radius: 16px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; background: rgba(16, 185, 129, 0.05); }
+    .scan-line { width: 100%; height: 2px; background: #10b981; position: absolute; top: 0; animation: scan 2s infinite ease-in-out; box-shadow: 0 0 10px #10b981; }
+    @keyframes scan { 0% { top: 0%; } 50% { top: 100%; } 100% { top: 0%; } }
+  </style>
+</head>
+<body>
+<div class="mobile-container">
+  <div id="screen-1" class="screen active">
+    <div style="text-align: center; margin-top: 60px;">
+      <h1 style="font-size: 42px; font-weight: 800; letter-spacing: -1px;">Dz<span class="brand-green">Link</span></h1>
+      <p style="color: #94a3b8; font-size: 14px; margin-top: 8px;">Your sovereign & secure gateway to Algeria</p>
+    </div>
+    <div style="margin-bottom: 40px; display: flex; flex-direction: column; gap: 12px;">
+      <button class="btn-primary" onclick="nextScreen('screen-2')">Create Account</button>
+      <button class="btn-outline" onclick="nextScreen('screen-3')">Sign In</button>
+    </div>
+  </div>
+  <div id="screen-2" class="screen">
+    <div>
+      <h2 style="font-size: 20px; margin-bottom: 8px;">Biometric Verification</h2>
+      <p style="color: #94a3b8; font-size: 13px; margin-bottom: 24px;">e-KYC Secured (Algerian Passport)</p>
+      <div class="scanner-box">
+        <div class="scan-line"></div>
+        <span style="font-size: 40px; margin-bottom: 8px;">🛂</span>
+        <p style="font-size: 12px; color: #cbd5e1;">Place Biometric Passport Here</p>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <button class="btn-primary" onclick="simulateKYC()">Take Selfie & Verify</button>
+      <button class="btn-outline" onclick="nextScreen('screen-1')">Back</button>
+    </div>
+  </div>
+  <div id="screen-3" class="screen">
+    <div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h3 style="font-size: 18px;">DzConnect ID</h3>
+        <span class="status-badge status-inactive">🔴 Non-Secure IP</span>
+      </div>
+      <div class="card">
+        <p style="font-size: 12px; color: #94a3b8;">Current Location</p>
+        <p style="font-size: 16px; font-weight: bold; margin-top: 4px;">📍 Paris, France</p>
+        <hr style="border-color: #475569; margin: 12px 0;">
+        <p style="font-size: 12px; color: #94a3b8;">Whitelist Status</p>
+        <p style="font-size: 14px; color: #ef4444; font-weight: bold; margin-top: 4px;">Inactive (Open Internet)</p>
+      </div>
+      <div style="text-align: center; margin-top: 30px;">
+        <div class="power-btn" id="pwr-btn" onclick="toggleConnection()">⏻</div>
+        <p style="font-size: 13px; color: #94a3b8; margin-top: 10px;" id="pwr-text">Tap to activate DzLink Gateway</p>
+      </div>
+    </div>
+    <button class="btn-outline" onclick="nextScreen('screen-1')">Log Out</button>
+  </div>
+  <div id="screen-4" class="screen">
+    <div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h3 style="font-size: 18px;">DzConnect ID</h3>
+        <span class="status-badge status-active">🟢 Connected (Sovereign IP)</span>
+      </div>
+      <div class="card" style="border-color: #10b981;">
+        <p style="font-size: 12px; color: #94a3b8;">Secured Location</p>
+        <p style="font-size: 16px; font-weight: bold; color: #34d399; margin-top: 4px;">📍 Algiers, Algeria (105.101.42.12)</p>
+        <hr style="border-color: #475569; margin: 12px 0;">
+        <p style="font-size: 12px; color: #94a3b8;">Whitelist Status</p>
+        <p style="font-size: 14px; color: #34d399; font-weight: bold; margin-top: 4px;">Active (Closed Perimeter)</p>
+      </div>
+      <p style="font-size: 14px; font-weight: bold; margin: 16px 0 8px 0;">Authorized Services:</p>
+      <div class="grid-apps">
+        <div class="app-item" onclick="nextScreen('screen-5')">
+          <div class="app-icon">💳</div>
+          <div style="font-size: 12px; font-weight: bold;">BaridiMob</div>
+        </div>
+        <div class="app-item" onclick="alert('Secured access granted to Customs DZ Portal')">
+          <div class="app-icon">🛃</div>
+          <div style="font-size: 12px; font-weight: bold;">Customs DZ</div>
+        </div>
+        <div class="app-item" onclick="alert('Secured access granted to Exam Portal')">
+          <div class="app-icon">🎓</div>
+          <div style="font-size: 12px; font-weight: bold;">Univ Exams</div>
+        </div>
+        <div class="app-item" onclick="nextScreen('screen-6')">
+          <div class="app-icon">🌐</div>
+          <div style="font-size: 12px; font-weight: bold; color: #f87171;">External Web Test</div>
+        </div>
+      </div>
+    </div>
+    <button class="btn-danger" onclick="nextScreen('screen-3')" style="margin-top: 15px;">Deactivate DzLink</button>
+  </div>
+  <div id="screen-5" class="screen" style="padding: 0;">
+    <div style="background: #059669; padding: 12px; font-size: 11px; text-align: center; font-weight: bold; color: white;">
+      🔒 Secured Session via DzLink Gateway (Algeria IP)
+    </div>
+    <div style="padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+      <div style="font-size: 50px; margin-bottom: 12px;">📱</div>
+      <h2 style="color: #34d399; margin-bottom: 8px;">BaridiMob</h2>
+      <p style="font-size: 13px; color: #94a3b8; margin-bottom: 24px;">Authorized access from abroad via Sovereign IP Gateway.</p>
+      <div class="card" style="width: 100%; text-align: left;">
+        <p style="font-size: 12px; color: #94a3b8;">RIP Balance</p>
+        <p style="font-size: 22px; font-weight: bold; color: white; margin-top: 4px;">245,000.00 DZD</p>
+      </div>
+    </div>
+    <div style="padding: 20px;">
+      <button class="btn-outline" onclick="nextScreen('screen-4')">Back to DzLink Dashboard</button>
+    </div>
+  </div>
+  <div id="screen-6" class="screen">
+    <div style="text-align: center; margin-top: 40px;">
+      <div style="font-size: 60px; margin-bottom: 16px;">🚫</div>
+      <h2 style="color: #ef4444; font-size: 24px; margin-bottom: 8px;">Access Denied</h2>
+      <p style="font-size: 14px; color: #94a3b8;">(Access Denied - Security Firewall)</p>
+    </div>
+    <div class="card" style="border-color: #ef4444; background: rgba(239, 68, 68, 0.1);">
+      <p style="font-size: 13px; color: #f87171; line-height: 1.5;">
+        This external website or service (ChatGPT, Google, etc.) <strong>is not whitelisted</strong> by DzLink.
+      </p>
+      <hr style="border-color: rgba(239, 68, 68, 0.2); margin: 12px 0;">
+      <p style="font-size: 12px; color: #cbd5e1;">
+        The Whitelist feature ensures the connection cannot be misused for remote exam cheating or data leaks outside authorized government systems.
+      </p>
+    </div>
+    <button class="btn-primary" onclick="nextScreen('screen-4')">Return to Secured Environment</button>
+  </div>
+</div>
+<script>
+  function nextScreen(screenId) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(screenId).classList.add('active');
+  }
+  function simulateKYC() {
+    alert("Passport scan and facial verification in progress...");
+    setTimeout(() => {
+      alert("✅ Identity successfully verified via DzConnect!");
+      nextScreen('screen-3');
+    }, 1000);
+  }
+  function toggleConnection() {
+    const btn = document.getElementById('pwr-btn');
+    const txt = document.getElementById('pwr-text');
+    btn.style.color = "#10b981";
+    txt.innerText = "Securing sovereign connection...";
+    setTimeout(() => {
+      nextScreen('screen-4');
+    }, 1200);
+  }
+</script>
+</body>
+</html>
