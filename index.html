@@ -11,7 +11,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#070d1e">
 
-  <!-- Tailwind CSS -->
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -30,8 +30,7 @@
   </script>
 
   <style>
-    /* Custom Cyber Glassmorphism & UI Adjustments */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap');
 
     * {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -55,7 +54,7 @@
       margin: 0;
     }
 
-    /* PWA Mobile Shell Frame */
+    /* PWA Mobile Shell Container */
     .pwa-shell {
       width: 100%;
       max-width: 430px;
@@ -66,13 +65,13 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 30px rgba(16, 185, 129, 0.1);
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.95), 0 0 35px rgba(16, 185, 129, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    /* Glass Card Styling */
+    /* Glassmorphism Styling */
     .glass-card {
-      background: rgba(18, 28, 53, 0.65);
+      background: rgba(18, 28, 53, 0.68);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -80,7 +79,7 @@
     }
 
     .glass-card-glow {
-      border: 1px solid rgba(16, 185, 129, 0.3);
+      border: 1px solid rgba(16, 185, 129, 0.35);
       box-shadow: 0 0 25px rgba(16, 185, 129, 0.12);
     }
 
@@ -89,9 +88,9 @@
       display: none;
       flex-direction: column;
       height: 100%;
-      padding: 20px 20px 24px 20px;
       overflow-y: auto;
-      animation: screenFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 16px 20px 24px 20px;
+      animation: screenFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .app-screen.active {
@@ -99,40 +98,97 @@
     }
 
     @keyframes screenFadeIn {
-      from { opacity: 0; transform: scale(0.97); }
+      from { opacity: 0; transform: scale(0.98); }
       to { opacity: 1; transform: scale(1); }
     }
 
-    /* Neon Pulse & Power Button */
     .glow-emerald {
       text-shadow: 0 0 14px rgba(16, 185, 129, 0.6);
     }
 
+    /* High-Tech Connection Power Button */
+    .power-button-container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 16px 0;
+    }
+
     .power-button {
-      width: 105px;
-      height: 105px;
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
-      border: 2px solid #334155;
+      border: 3px solid #334155;
       background: radial-gradient(circle, #0f172a 0%, #020617 100%);
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 10px auto;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.9), 0 0 15px rgba(0,0,0,0.6);
+      z-index: 10;
+    }
+
+    .power-button.connecting {
+      border-color: #f59e0b;
+      color: #f59e0b;
+      animation: spinBorder 1.5s linear infinite;
     }
 
     .power-button.active {
       border-color: #10b981;
       color: #10b981;
-      box-shadow: inset 0 0 20px rgba(16, 185, 129, 0.3), 0 0 35px rgba(16, 185, 129, 0.5);
-      animation: powerPulse 2s infinite alternate;
+      box-shadow: inset 0 0 25px rgba(16, 185, 129, 0.35), 0 0 40px rgba(16, 185, 129, 0.55);
+      animation: powerGlow 2s infinite alternate;
     }
 
-    @keyframes powerPulse {
+    @keyframes powerGlow {
       0% { box-shadow: inset 0 0 20px rgba(16, 185, 129, 0.3), 0 0 25px rgba(16, 185, 129, 0.4); }
-      100% { box-shadow: inset 0 0 30px rgba(16, 185, 129, 0.5), 0 0 45px rgba(16, 185, 129, 0.7); }
+      100% { box-shadow: inset 0 0 35px rgba(16, 185, 129, 0.6), 0 0 50px rgba(16, 185, 129, 0.8); }
+    }
+
+    /* Fingerprint Interactive Target */
+    .fingerprint-zone {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 2px dashed rgba(16, 185, 129, 0.5);
+      background: rgba(16, 185, 129, 0.05);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .fingerprint-zone:active {
+      transform: scale(0.96);
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.15);
+    }
+
+    .fingerprint-scan-beam {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #10b981;
+      box-shadow: 0 0 12px #10b981;
+      animation: fpScan 1.8s ease-in-out infinite alternate;
+      display: none;
+    }
+
+    .fingerprint-zone.scanning .fingerprint-scan-beam {
+      display: block;
+    }
+
+    @keyframes fpScan {
+      0% { top: 5%; }
+      100% { top: 92%; }
     }
 
     /* Laser Scanner Beam */
@@ -152,7 +208,7 @@
       100% { top: 0%; opacity: 0.8; }
     }
 
-    /* Custom Scrollbar for Logs */
+    /* Scrollbars */
     .cyber-scrollbar::-webkit-scrollbar {
       width: 4px;
     }
@@ -164,7 +220,7 @@
       border-radius: 4px;
     }
 
-    /* Bottom Sheet Drawer Modal */
+    /* Bottom Sheet Modal Drawer */
     .bottom-sheet {
       position: absolute;
       bottom: -100%;
@@ -178,31 +234,31 @@
       padding: 24px;
       transition: bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       z-index: 50;
-      box-shadow: 0 -20px 50px rgba(0,0,0,0.8);
+      box-shadow: 0 -20px 50px rgba(0,0,0,0.85);
     }
 
     .bottom-sheet.open {
       bottom: 0;
     }
 
-    /* Toast Notification */
+    /* Floating Toast */
     .toast-msg {
       position: absolute;
-      top: 20px;
+      top: 60px;
       left: 50%;
       transform: translateX(-50%) translateY(-100px);
       background: rgba(15, 23, 42, 0.95);
       border: 1px solid rgba(16, 185, 129, 0.5);
       color: #f8fafc;
-      padding: 12px 20px;
+      padding: 10px 18px;
       border-radius: 30px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       z-index: 100;
       pointer-events: none;
     }
@@ -211,10 +267,10 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    /* CCP Card Metallic Gradient */
+    /* Metallic CCP Card */
     .ccp-card {
       background: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #064e3b 100%);
-      border: 1px solid rgba(16, 185, 129, 0.3);
+      border: 1px solid rgba(16, 185, 129, 0.35);
       position: relative;
       overflow: hidden;
     }
@@ -235,186 +291,267 @@
 
 <div class="pwa-shell">
 
-  <!-- TOP APP BAR -->
-  <div class="flex items-center justify-between px-5 pt-4 pb-2 border-b border-slate-800/60 bg-slate-950/40 backdrop-blur-md shrink-0">
+  <!-- FIXED APP STATUS HEADER -->
+  <div class="flex items-center justify-between px-5 pt-4 pb-2 border-b border-slate-800/60 bg-slate-950/70 backdrop-blur-md shrink-0 z-30">
     <div class="flex items-center gap-2">
       <span class="text-xl">🇩🇿</span>
       <span class="font-black text-lg tracking-tight text-white">Dz<span class="text-emerald-400 glow-emerald">Link</span></span>
-      <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold px-2 py-0.5 rounded-full ml-1">v2.4 SOVEREIGN</span>
+      <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold px-2 py-0.5 rounded-full ml-1">SOVEREIGN</span>
     </div>
-    <div class="flex items-center gap-3 text-xs font-mono text-slate-400">
-      <span id="pwa-time">11:07</span>
-      <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+    <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+      <span id="pwa-time">11:16</span>
+      <div id="header-dot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
     </div>
   </div>
 
-  <!-- TOAST NOTIFICATION POPUP -->
+  <!-- FLOATING TOAST NOTIFICATION -->
   <div id="toast" class="toast-msg">
-    <span id="toast-icon">🛡️</span>
-    <span id="toast-text">System Initialized</span>
+    <span id="toast-icon">🛡️️</span>
+    <span id="toast-text">System Ready</span>
   </div>
 
-  <!-- ================= SCREEN 1: LANDING & VISION ================= -->
+  <!-- ================= SCREEN 1: WELCOME & LANDING ================= -->
   <div id="screen-landing" class="app-screen active justify-between">
-    <div class="flex flex-col items-center text-center mt-6">
-      <div class="w-20 h-20 rounded-3xl glass-card flex items-center justify-center border-emerald-500/30 shadow-lg shadow-emerald-500/10 mb-4">
+    <div class="flex flex-col items-center text-center mt-4">
+      <div class="w-20 h-20 rounded-3xl glass-card flex items-center justify-center border-emerald-500/30 shadow-lg shadow-emerald-500/10 mb-3">
         <span class="text-4xl">🇩🇿</span>
       </div>
       <h1 class="text-3xl font-black text-white tracking-tight">Dz<span class="text-emerald-400 glow-emerald">Link</span></h1>
-      <p class="text-xs text-slate-400 mt-2 max-w-[280px]">Sovereign Biometric Gateway & Whitelisted Infrastructure for the Algerian Diaspora</p>
+      <p class="text-xs text-slate-400 mt-1 max-w-[280px]">Sovereign Biometric Gateway & Whitelisted Network for the Diaspora</p>
 
-      <div class="flex flex-wrap justify-center gap-2 mt-6">
-        <span class="bg-emerald-950/50 text-emerald-400 border border-emerald-500/30 text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> e-KYC Verified
+      <div class="flex flex-wrap justify-center gap-2 mt-5">
+        <span class="bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> e-KYC Passport & Touch ID
         </span>
-        <span class="bg-cyan-950/50 text-cyan-400 border border-cyan-500/30 text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5">
-          🔒 Encrypted Subnet
+        <span class="bg-cyan-950/60 text-cyan-400 border border-cyan-500/30 text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1.5">
+          🔒 Whitelisted Gateway
         </span>
       </div>
 
-      <!-- Quick Highlights Card -->
-      <div class="glass-card w-full p-4 mt-8 text-left space-y-3">
+      <!-- Quick Technical Highlights -->
+      <div class="glass-card w-full p-4 mt-6 text-left space-y-3">
         <div class="flex items-center gap-3">
-          <div class="w-8 h-8 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 font-bold text-sm">01</div>
+          <div class="w-8 h-8 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 font-bold text-xs">01</div>
           <div>
             <h4 class="text-xs font-bold text-white">Biometric Identity Seal</h4>
-            <p class="text-[11px] text-slate-400">Direct NFC sync with National Civil Registry</p>
+            <p class="text-[11px] text-slate-400">Civil Registry e-Passport & Fingerprint Verification</p>
           </div>
         </div>
         <div class="flex items-center gap-3">
-          <div class="w-8 h-8 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 font-bold text-sm">02</div>
+          <div class="w-8 h-8 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 font-bold text-xs">02</div>
           <div>
-            <h4 class="text-xs font-bold text-white">Whitelisted Gateway Perimeter</h4>
-            <p class="text-[11px] text-slate-400">Restricts unauthorized data exfiltration abroad</p>
+            <h4 class="text-xs font-bold text-white">Whitelisted Gateway Subnet</h4>
+            <p class="text-[11px] text-slate-400">Protects state services against foreign leaks</p>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="space-y-3 mb-4">
-      <button onclick="navigateTo('screen-ekyc'); playSynthTone(600, 0.1);" class="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-bold py-4 rounded-2xl text-sm shadow-lg shadow-emerald-500/25 active:scale-[0.98] transition-all">
-        Launch Biometric Portal
+    <div class="space-y-2.5 my-4">
+      <button onclick="navigateTo('screen-ekyc'); playSynthTone(600, 0.1);" class="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-bold py-3.5 rounded-xl text-sm shadow-lg shadow-emerald-500/25 active:scale-[0.98] transition-all">
+        Create Account (e-KYC)
       </button>
-      <button onclick="navigateTo('screen-dashboard'); playSynthTone(400, 0.1);" class="w-full glass-card hover:bg-slate-800/50 text-slate-300 font-semibold py-3.5 rounded-2xl text-xs border-slate-700 active:scale-[0.98] transition-all">
-        Direct Console Access
+      <button onclick="navigateTo('screen-dashboard-off'); playSynthTone(400, 0.1);" class="w-full glass-card hover:bg-slate-800/50 text-slate-300 font-semibold py-3 rounded-xl text-xs border-slate-700 active:scale-[0.98] transition-all">
+        Sign In to Gateway Console
       </button>
     </div>
   </div>
 
-  <!-- ================= SCREEN 2: REAL WEBCAM / e-KYC PASSPORT SCANNER ================= -->
-  <div id="screen-ekyc" class="app-screen justify-between">
-    <div>
-      <div class="flex items-center justify-between mb-4">
-        <div>
-          <h2 class="text-lg font-bold text-white">Biometric e-KYC</h2>
-          <p class="text-xs text-slate-400">NFC & Facial Liveness Verification</p>
-        </div>
-        <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-1 rounded-full">Algérie Poste Sync</span>
-      </div>
+  <!-- ================= SCREEN 2: e-KYC PORTAL (PASSPORT + FINGERPRINT) ================= -->
+  <div id="screen-ekyc" class="app-screen space-y-4">
+    <!-- Universal Header with Back Button -->
+    <div class="flex items-center justify-between pb-2 border-b border-slate-800/60">
+      <button onclick="navigateTo('screen-landing'); playSynthTone(350, 0.08);" class="flex items-center gap-1.5 text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 rounded-xl active:scale-95 transition-all">
+        <span>← Back</span>
+      </button>
+      <span class="text-xs font-bold text-white">Identity Verification</span>
+      <span class="text-[10px] font-mono text-slate-400">e-KYC v2</span>
+    </div>
 
-      <!-- Scanner Viewport (Camera or Animated Laser Fallback) -->
-      <div class="glass-card glass-card-glow relative h-64 w-full overflow-hidden flex flex-col justify-center items-center rounded-2xl">
+    <!-- Mode Tab Selector -->
+    <div class="grid grid-cols-2 gap-2 bg-slate-950 p-1 rounded-xl border border-slate-800">
+      <button id="tab-btn-passport" onclick="switchKycTab('passport')" class="py-2 text-xs font-bold rounded-lg text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 transition-all">
+        🛂 Passport & Face
+      </button>
+      <button id="tab-btn-fingerprint" onclick="switchKycTab('fingerprint')" class="py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-white transition-all">
+        👆 Touch ID / Fingerprint
+      </button>
+    </div>
+
+    <!-- TAB 1: PASSPORT & FACIAL SCAN VIEW -->
+    <div id="kyc-view-passport" class="space-y-3">
+      <div class="glass-card glass-card-glow relative h-56 w-full overflow-hidden flex flex-col justify-center items-center rounded-2xl">
         <div class="laser-line"></div>
         
-        <!-- Live Video Element -->
         <video id="webcam-feed" autoplay playsinline muted class="hidden absolute inset-0 w-full h-full object-cover rounded-2xl"></video>
 
-        <!-- Fallback Graphic View -->
         <div id="scanner-graphic" class="flex flex-col items-center justify-center text-center p-4">
-          <div class="w-20 h-28 border-2 border-dashed border-emerald-400/60 rounded-xl flex items-center justify-center mb-3 bg-emerald-950/20">
-            <span class="text-4xl animate-bounce">🛂</span>
+          <div class="w-16 h-24 border-2 border-dashed border-emerald-400/60 rounded-xl flex items-center justify-center mb-2 bg-emerald-950/20">
+            <span class="text-3xl animate-bounce">🛂</span>
           </div>
-          <p class="text-xs font-semibold text-emerald-400">Align Biometric Passport NFC</p>
-          <p class="text-[10px] text-slate-400 mt-1">Place device over passport chip or frame face</p>
+          <p class="text-xs font-semibold text-emerald-400">Align Algerian Biometric Passport</p>
+          <p class="text-[10px] text-slate-400 mt-1">NFC Reader Active • Place NFC chip over device</p>
         </div>
       </div>
 
-      <!-- Control Buttons -->
-      <div class="grid grid-cols-2 gap-3 mt-4">
-        <button onclick="toggleCamera()" class="glass-card hover:bg-slate-800 text-slate-200 text-xs font-semibold py-3 rounded-xl border-slate-700 flex items-center justify-center gap-2">
+      <div class="grid grid-cols-2 gap-2">
+        <button onclick="toggleCamera()" class="glass-card hover:bg-slate-800 text-slate-200 text-xs font-semibold py-2.5 rounded-xl border-slate-700 flex items-center justify-center gap-2">
           <span>📷</span> <span id="cam-btn-text">Enable Camera</span>
         </button>
-        <button onclick="executeBiometricScan()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-3 rounded-xl shadow-lg shadow-emerald-500/20 active:scale-[0.98] transition-all">
-          ⚡ Start Verification
+        <button onclick="executeBiometricScan('Passport NFC & Face')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-2.5 rounded-xl shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
+          ⚡ Verify Passport
         </button>
-      </div>
-
-      <div class="glass-card p-3.5 mt-4 text-[11px] text-slate-300 space-y-2">
-        <div class="flex justify-between items-center text-slate-400">
-          <span>Standard:</span>
-          <span class="font-mono text-emerald-400">ICAO 9303 Compliant</span>
-        </div>
-        <div class="flex justify-between items-center text-slate-400">
-          <span>Encryption:</span>
-          <span class="font-mono text-cyan-400">ECDSA P-384</span>
-        </div>
       </div>
     </div>
 
-    <div class="mt-4">
-      <button onclick="navigateTo('screen-landing')" class="w-full glass-card text-slate-400 text-xs font-semibold py-3 rounded-xl">
-        Cancel & Return
+    <!-- TAB 2: FINGERPRINT SCAN VIEW -->
+    <div id="kyc-view-fingerprint" class="hidden space-y-4">
+      <div class="glass-card p-5 flex flex-col items-center text-center space-y-3">
+        <span class="text-xs font-bold text-slate-300">Biometric Touch ID Scan</span>
+        <p class="text-[11px] text-slate-400">Press and hold your finger on the optical sensor below</p>
+
+        <!-- Interactive Fingerprint Target -->
+        <div id="fp-target" onclick="simulateFingerprintScan()" class="fingerprint-zone my-2">
+          <div class="fingerprint-scan-beam"></div>
+          <svg class="w-16 h-16 text-emerald-400 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"></path>
+          </svg>
+        </div>
+
+        <div id="fp-status-label" class="text-xs font-mono font-bold text-emerald-400">READY FOR TOUCH ID</div>
+
+        <div class="w-full bg-slate-950 p-2 rounded-xl border border-slate-800 text-[10px] font-mono text-slate-400 flex justify-between">
+          <span>BIO-HASH:</span>
+          <span id="fp-hash-val" class="text-cyan-400">PENDING SCAN</span>
+        </div>
+      </div>
+
+      <button onclick="simulateFingerprintScan()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-3 rounded-xl shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
+        👆 Tap to Scan Fingerprint
       </button>
+    </div>
+
+    <!-- Technical Specs Footer -->
+    <div class="glass-card p-3 text-[11px] text-slate-400 space-y-1 font-mono">
+      <div class="flex justify-between">
+        <span>SECURITY STANDARD:</span>
+        <span class="text-emerald-400">DZ-BIO-449</span>
+      </div>
+      <div class="flex justify-between">
+        <span>HASH ENCRYPTION:</span>
+        <span class="text-cyan-400">SHA3-256</span>
+      </div>
     </div>
   </div>
 
-  <!-- ================= SCREEN 3: DASHBOARD & SOVEREIGN GATEWAY ================= -->
-  <div id="screen-dashboard" class="app-screen space-y-4">
-    
-    <!-- Status Card Header -->
-    <div class="glass-card p-4 relative overflow-hidden" id="dash-status-card">
+  <!-- ================= SCREEN 3: GATEWAY DISCONNECTED STATE ================= -->
+  <div id="screen-dashboard-off" class="app-screen space-y-4">
+    <!-- Universal Header with Back Button -->
+    <div class="flex items-center justify-between pb-2 border-b border-slate-800/60">
+      <button onclick="navigateTo('screen-landing'); playSynthTone(350, 0.08);" class="flex items-center gap-1.5 text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 rounded-xl active:scale-95 transition-all">
+        <span>← Back</span>
+      </button>
+      <span class="text-xs font-bold text-white">DzLink Console</span>
+      <span class="text-[10px] font-mono text-red-400 bg-red-500/10 border border-red-500/30 px-2 py-0.5 rounded-full">OFFLINE</span>
+    </div>
+
+    <!-- Location & Status Summary Card (Completely clean, NO overlapping banners) -->
+    <div class="glass-card p-4">
       <div class="flex justify-between items-start">
         <div>
-          <span class="text-[10px] uppercase font-bold tracking-wider text-slate-400">Perimeter Status</span>
-          <h3 id="tunnel-title" class="text-base font-bold text-red-400 mt-0.5">Open Foreign Network</h3>
-          <p id="tunnel-ip" class="text-xs font-mono text-slate-300 mt-1">📍 Paris Node (185.12.98.4)</p>
+          <span class="text-[10px] uppercase font-bold tracking-wider text-slate-400">Current Location</span>
+          <h3 class="text-base font-bold text-red-400 mt-0.5">📍 Paris, France (Open Network)</h3>
+          <p class="text-xs font-mono text-slate-300 mt-1">IP: 185.12.98.4 • Public ISP</p>
         </div>
-        <span id="status-pill" class="bg-red-500/20 text-red-400 border border-red-500/30 text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
-          <span class="w-1.5 h-1.5 rounded-full bg-red-400"></span> Restricted
+        <span class="bg-red-500/20 text-red-400 border border-red-500/30 text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-red-400"></span> Blocked
+        </span>
+      </div>
+    </div>
+
+    <!-- Power Button Core Container (Cleanly placed, no overlap) -->
+    <div class="glass-card p-5 text-center space-y-2">
+      <span class="text-xs font-bold text-slate-300">Sovereign Gateway Activation</span>
+      <p class="text-[11px] text-slate-400">Tap below to establish WireGuard tunnel to Algiers Core</p>
+
+      <div class="power-button-container">
+        <div id="power-btn-off" onclick="toggleGatewayConnection()" class="power-button">
+          <span class="text-3xl font-black text-slate-400">⏻</span>
+        </div>
+      </div>
+
+      <p id="power-off-label" class="text-xs text-slate-400 font-medium">DISCONNECTED</p>
+    </div>
+
+    <!-- Inactive Services Warning Card -->
+    <div class="glass-card p-3.5 space-y-2">
+      <div class="text-xs font-bold text-slate-300">Whitelisted Service Access:</div>
+      <div class="grid grid-cols-2 gap-2 text-[11px] opacity-60">
+        <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 text-slate-400">💳 BaridiMob (Blocked)</div>
+        <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 text-slate-400">🎓 MESRS Exam (Blocked)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SCREEN 4: GATEWAY CONNECTED STATE (SOVEREIGN IP) ================= -->
+  <div id="screen-dashboard-on" class="app-screen space-y-4">
+    <!-- Universal Header with Back Button -->
+    <div class="flex items-center justify-between pb-2 border-b border-slate-800/60">
+      <button onclick="navigateTo('screen-dashboard-off'); playSynthTone(350, 0.08);" class="flex items-center gap-1.5 text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 rounded-xl active:scale-95 transition-all">
+        <span>← Disconnect</span>
+      </button>
+      <span class="text-xs font-bold text-white">Sovereign Console</span>
+      <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded-full flex items-center gap-1">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> ACTIVE
+      </span>
+    </div>
+
+    <!-- Active Location Card -->
+    <div class="glass-card p-4 border-emerald-500/40 bg-emerald-950/10">
+      <div class="flex justify-between items-start">
+        <div>
+          <span class="text-[10px] uppercase font-bold tracking-wider text-emerald-400">Sovereign Subnet Active</span>
+          <h3 class="text-base font-bold text-white mt-0.5">📍 Algiers, Algeria</h3>
+          <p class="text-xs font-mono text-emerald-300 mt-1">IP: 105.101.42.12 • BGP Whitelisted</p>
+        </div>
+        <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold px-2.5 py-1 rounded-full">
+          AES-256
         </span>
       </div>
 
-      <!-- Power Button Container -->
-      <div class="my-3 text-center">
-        <div id="power-btn" onclick="toggleGatewayTunnel()" class="power-button">
-          <span class="text-3xl font-black">⏻</span>
-        </div>
-        <p id="power-btn-label" class="text-xs text-slate-400 font-medium mt-1">Tap to Establish Sovereign Tunnel</p>
-      </div>
-
-      <!-- Dynamic Interactive Canvas: Topology Map -->
-      <div class="mt-2">
+      <!-- Network Topology Canvas -->
+      <div class="mt-3">
         <div class="flex justify-between items-center mb-1 text-[10px] text-slate-400 font-mono">
-          <span>SUBNET TOPOLOGY MAP</span>
-          <span id="topo-speed">PACKETS: 0/s</span>
+          <span>UNDERSEA FIBER TOPOLOGY</span>
+          <span class="text-emerald-400">120 Mbps</span>
         </div>
-        <canvas id="topoCanvas" width="350" height="110" class="w-full bg-slate-950/80 rounded-xl border border-slate-800/80"></canvas>
+        <canvas id="topoCanvas" width="350" height="100" class="w-full bg-slate-950/90 rounded-xl border border-slate-800/80"></canvas>
       </div>
     </div>
 
-    <!-- Real-time Network Telemetry (Canvas Sparkline Latency) -->
-    <div class="glass-card p-3.5">
+    <!-- Live Ping Chart -->
+    <div class="glass-card p-3">
       <div class="flex justify-between items-center mb-1">
-        <span class="text-[11px] font-bold text-slate-300">Live Gateway Latency</span>
+        <span class="text-[11px] font-bold text-slate-300">Tunnel Latency</span>
         <span id="ping-text" class="text-xs font-mono font-bold text-emerald-400">18 ms</span>
       </div>
-      <canvas id="latencyCanvas" width="350" height="45" class="w-full bg-slate-950/60 rounded-lg border border-slate-800/50"></canvas>
+      <canvas id="latencyCanvas" width="350" height="40" class="w-full bg-slate-950/60 rounded-lg border border-slate-800/50"></canvas>
     </div>
 
-    <!-- Scrolling Terminal Telemetry Feed -->
+    <!-- Terminal Log Stream -->
     <div class="glass-card p-3">
-      <div class="flex justify-between items-center mb-1.5 text-[10px] text-slate-400 font-mono">
-        <span>SECURITY CONSOLE LOG</span>
-        <span class="text-emerald-400">STREAM ACTIVE</span>
+      <div class="flex justify-between items-center mb-1 text-[10px] text-slate-400 font-mono">
+        <span>SECURITY AUDIT STREAM</span>
+        <span class="text-emerald-400">LIVE</span>
       </div>
-      <div id="terminal-log" class="h-20 overflow-y-auto font-mono text-[10px] text-emerald-400/90 space-y-1 cyber-scrollbar bg-slate-950/90 p-2 rounded-lg border border-slate-800/80">
-        <div>[11:07:01] System boot complete. Waiting for gateway connection...</div>
+      <div id="terminal-log" class="h-16 overflow-y-auto font-mono text-[10px] text-emerald-400 space-y-1 cyber-scrollbar bg-slate-950/90 p-2 rounded-lg border border-slate-800">
+        <div>[11:16:01] Wireguard handshake completed with Algiers Core.</div>
       </div>
     </div>
 
-    <!-- Whitelisted App Portal Grid -->
+    <!-- Authorized Application Grid -->
     <div>
-      <h4 class="text-xs font-bold text-slate-300 mb-2">Whitelisted Applications</h4>
+      <h4 class="text-xs font-bold text-slate-300 mb-2">Whitelisted State Applications</h4>
       <div class="grid grid-cols-2 gap-2.5">
         <div onclick="navigateTo('screen-baridimob'); playSynthTone(500, 0.08);" class="glass-card p-3.5 flex items-center gap-3 cursor-pointer hover:border-emerald-500/40 active:scale-95 transition-all">
           <div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-xl">💳</div>
@@ -432,7 +569,7 @@
           </div>
         </div>
 
-        <div onclick="showToast('Customs DZ Certificate Authenticated ✅', 'success'); playSynthTone(600, 0.08);" class="glass-card p-3.5 flex items-center gap-3 cursor-pointer hover:border-emerald-500/40 active:scale-95 transition-all">
+        <div onclick="showToast('Customs DZ Certificate Authenticated ✅', 'success'); playSynthTone(600, 0.08);" class="glass-card p-3.5 flex items-center gap-3 cursor-pointer hover:border-amber-500/40 active:scale-95 transition-all">
           <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-xl">🛃</div>
           <div>
             <h5 class="text-xs font-bold text-white">Douane DZ</h5>
@@ -449,76 +586,26 @@
         </div>
       </div>
     </div>
-
-    <button onclick="navigateTo('screen-landing')" class="w-full glass-card text-slate-400 text-xs font-semibold py-3 rounded-xl mb-2">
-      Log Out Session
-    </button>
-  </div>
-
-  <!-- ================= SCREEN 4: FIREWALL WHITELIST SANDBOX ================= -->
-  <div id="screen-firewall" class="app-screen justify-between">
-    <div class="space-y-4">
-      <div class="flex items-center justify-between">
-        <div>
-          <h2 class="text-lg font-bold text-white">Perimeter Firewall Sandbox</h2>
-          <p class="text-xs text-slate-400">Live Whitelist Inspection Simulator</p>
-        </div>
-        <span class="text-xs font-mono text-red-400 bg-red-500/10 border border-red-500/30 px-2 py-0.5 rounded-full">DPI Active</span>
-      </div>
-
-      <!-- URL Input & Quick Presets -->
-      <div class="glass-card p-3.5 space-y-3">
-        <label class="text-[11px] font-semibold text-slate-300">Target Request URL:</label>
-        <div class="flex gap-2">
-          <input id="test-url-input" type="text" value="chatgpt.com" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-emerald-500">
-          <button onclick="runFirewallInspection()" class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold px-4 py-2 rounded-xl text-xs active:scale-95">
-            Test
-          </button>
-        </div>
-
-        <div class="text-[10px] text-slate-400">Quick Test Targets:</div>
-        <div class="flex flex-wrap gap-1.5">
-          <button onclick="setTestUrl('chatgpt.com')" class="bg-slate-800 text-red-400 border border-red-500/30 text-[10px] font-mono px-2.5 py-1 rounded-lg">chatgpt.com 🚫</button>
-          <button onclick="setTestUrl('google.com')" class="bg-slate-800 text-red-400 border border-red-500/30 text-[10px] font-mono px-2.5 py-1 rounded-lg">google.com 🚫</button>
-          <button onclick="setTestUrl('baridimob.dz')" class="bg-slate-800 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono px-2.5 py-1 rounded-lg">baridimob.dz ✅</button>
-          <button onclick="setTestUrl('mesrs.dz')" class="bg-slate-800 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono px-2.5 py-1 rounded-lg">mesrs.dz ✅</button>
-        </div>
-      </div>
-
-      <!-- Animated Visualizer Block -->
-      <div class="glass-card p-4 text-center relative overflow-hidden" id="fw-result-card">
-        <div class="text-xs font-mono text-slate-400 mb-2">INSPECTION STAGE PROGRESS</div>
-        
-        <div id="fw-stage-box" class="py-6 px-3 bg-slate-950/80 rounded-xl border border-slate-800 flex flex-col items-center justify-center space-y-2">
-          <div id="fw-stage-icon" class="text-3xl">🔍</div>
-          <p id="fw-stage-title" class="text-xs font-bold text-slate-200">Ready for Packet Analysis</p>
-          <p id="fw-stage-desc" class="text-[11px] text-slate-400">Select a target URL above to test whitelist enforcement.</p>
-        </div>
-      </div>
-
-      <!-- Technical Breakdown Card -->
-      <div class="glass-card p-3.5 text-[11px] space-y-2 text-slate-300">
-        <div class="font-bold text-white border-b border-slate-700/60 pb-1">Why Whitelisting Matters:</div>
-        <p class="text-slate-400 leading-relaxed">
-          DzLink blocks arbitrary foreign traffic while connected. This guarantees remote university exams cannot be exfiltrated via AI models, and banking sessions cannot leak sensitive authorization tokens to third parties.
-        </p>
-      </div>
-    </div>
-
-    <button onclick="navigateTo('screen-dashboard')" class="w-full glass-card text-slate-300 text-xs font-semibold py-3.5 rounded-xl mt-4">
-      Return to Dashboard
-    </button>
   </div>
 
   <!-- ================= SCREEN 5: BARIDIMOB BANKING HUB ================= -->
-  <div id="screen-5-baridimob" class="app-screen space-y-4">
-    <!-- Subnet Header Badge -->
-    <div class="bg-emerald-600/20 border border-emerald-500/30 rounded-xl p-2.5 text-center flex items-center justify-center gap-2">
-      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-      <span class="text-xs font-bold text-emerald-300">Secured Algérie Poste RIP Subnet</span>
+  <div id="screen-baridimob" class="app-screen space-y-4">
+    <!-- Universal Header with Back Button -->
+    <div class="flex items-center justify-between pb-2 border-b border-slate-800/60">
+      <button onclick="navigateTo('screen-dashboard-on'); playSynthTone(350, 0.08);" class="flex items-center gap-1.5 text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 rounded-xl active:scale-95 transition-all">
+        <span>← Back</span>
+      </button>
+      <span class="text-xs font-bold text-white">BaridiMob Mobile</span>
+      <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">RIP SECURE</span>
     </div>
 
-    <!-- Metallic CCP Debit Card -->
+    <!-- Security Top Banner (Clean flow) -->
+    <div class="bg-emerald-950/40 border border-emerald-500/30 rounded-xl p-2.5 text-center flex items-center justify-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span class="text-xs font-semibold text-emerald-300">Session Whitelisted • Zero Fraud Risk</span>
+    </div>
+
+    <!-- CCP Card -->
     <div class="ccp-card rounded-2xl p-5 shadow-xl space-y-4">
       <div class="flex justify-between items-start">
         <div>
@@ -548,84 +635,122 @@
       </div>
     </div>
 
-    <!-- Quick CCP Transfer Form -->
+    <!-- Quick Transfer Form -->
     <div class="glass-card p-4 space-y-3">
-      <h4 class="text-xs font-bold text-white">Quick RIP / CCP Transfer</h4>
+      <h4 class="text-xs font-bold text-white">Instant RIP / CCP Transfer</h4>
       
       <div class="space-y-1">
         <label class="text-[10px] text-slate-400">Recipient RIP Number:</label>
-        <input type="text" placeholder="00799999..." value="007999990001122334 55" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-emerald-500">
+        <input type="text" value="007999990001122334 55" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-emerald-500">
       </div>
 
       <div class="space-y-1">
-        <label class="text-[10px] text-slate-400">Transfer Amount (DZD):</label>
+        <label class="text-[10px] text-slate-400">Amount (DZD):</label>
         <input id="transfer-amount" type="number" value="12000" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-emerald-500">
       </div>
 
-      <button onclick="executeTransfer()" class="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-bold py-3.5 rounded-xl text-xs shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
+      <button onclick="executeTransfer()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
         Execute Instant Transfer
       </button>
     </div>
+  </div>
 
-    <button onclick="navigateTo('screen-dashboard')" class="w-full glass-card text-slate-400 text-xs font-semibold py-3 rounded-xl">
-      Back to Dashboard
+  <!-- ================= SCREEN 6: FIREWALL WHITELIST SANDBOX ================= -->
+  <div id="screen-firewall" class="app-screen space-y-4">
+    <!-- Universal Header with Back Button -->
+    <div class="flex items-center justify-between pb-2 border-b border-slate-800/60">
+      <button onclick="navigateTo('screen-dashboard-on'); playSynthTone(350, 0.08);" class="flex items-center gap-1.5 text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 rounded-xl active:scale-95 transition-all">
+        <span>← Back</span>
+      </button>
+      <span class="text-xs font-bold text-white">Firewall Inspection Sandbox</span>
+      <span class="text-[10px] font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full">DPI ACTIVE</span>
+    </div>
+
+    <!-- URL Tester -->
+    <div class="glass-card p-3.5 space-y-3">
+      <label class="text-[11px] font-semibold text-slate-300">Target URL Inspection:</label>
+      <div class="flex gap-2">
+        <input id="test-url-input" type="text" value="chatgpt.com" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-emerald-500">
+        <button onclick="runFirewallInspection()" class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold px-4 py-2 rounded-xl text-xs active:scale-95">
+          Inspect
+        </button>
+      </div>
+
+      <div class="text-[10px] text-slate-400">Quick Test Targets:</div>
+      <div class="flex flex-wrap gap-1.5">
+        <button onclick="setTestUrl('chatgpt.com')" class="bg-slate-800 text-red-400 border border-red-500/30 text-[10px] font-mono px-2.5 py-1 rounded-lg">chatgpt.com 🚫</button>
+        <button onclick="setTestUrl('google.com')" class="bg-slate-800 text-red-400 border border-red-500/30 text-[10px] font-mono px-2.5 py-1 rounded-lg">google.com 🚫</button>
+        <button onclick="setTestUrl('baridimob.dz')" class="bg-slate-800 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono px-2.5 py-1 rounded-lg">baridimob.dz ✅</button>
+        <button onclick="setTestUrl('mesrs.dz')" class="bg-slate-800 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono px-2.5 py-1 rounded-lg">mesrs.dz ✅</button>
+      </div>
+    </div>
+
+    <!-- Inspection Output Visualizer -->
+    <div class="glass-card p-4 text-center">
+      <div id="fw-stage-box" class="py-6 px-3 bg-slate-950/80 rounded-xl border border-slate-800 flex flex-col items-center justify-center space-y-2">
+        <div id="fw-stage-icon" class="text-3xl">🔍</div>
+        <p id="fw-stage-title" class="text-xs font-bold text-slate-200">Ready for Packet Inspection</p>
+        <p id="fw-stage-desc" class="text-[11px] text-slate-400">Select or enter a target domain to test whitelist rules.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SCREEN 7: MESRS PROCTORED EXAM PORTAL ================= -->
+  <div id="screen-exam" class="app-screen space-y-4">
+    <!-- Universal Header with Back Button -->
+    <div class="flex items-center justify-between pb-2 border-b border-slate-800/60">
+      <button onclick="navigateTo('screen-dashboard-on'); playSynthTone(350, 0.08);" class="flex items-center gap-1.5 text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 rounded-xl active:scale-95 transition-all">
+        <span>← Exit Exam</span>
+      </button>
+      <span class="text-xs font-bold text-white">MESRS Portal</span>
+      <span class="text-[10px] font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full">PROCTORED</span>
+    </div>
+
+    <!-- AI Proctor Badge -->
+    <div class="bg-cyan-950/60 border border-cyan-500/40 rounded-xl p-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></div>
+        <div>
+          <div class="text-xs font-bold text-cyan-300">AI Proctoring Active</div>
+          <div class="text-[10px] text-slate-400">Face Locked • Foreign AI Blocked</div>
+        </div>
+      </div>
+      <span class="text-xs font-mono text-cyan-400 bg-cyan-500/20 px-2 py-1 rounded-md">LIVE</span>
+    </div>
+
+    <div class="glass-card p-4 space-y-2">
+      <div class="flex justify-between items-center text-xs text-slate-400 font-mono">
+        <span>USTHB - COMPUTER SCIENCE</span>
+        <span>TIME: 44:12</span>
+      </div>
+      <h3 class="text-sm font-bold text-white">Final Exam: Sovereign Network Security</h3>
+    </div>
+
+    <div class="glass-card p-4 space-y-3">
+      <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">Question 1 of 10</span>
+      <p class="text-xs text-slate-200 leading-relaxed">
+        How does establishing an e-KYC verified BGP tunnel prevent man-in-the-middle attacks on state services when accessed from outside sovereign territory?
+      </p>
+
+      <div class="space-y-2 pt-2">
+        <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 cursor-pointer hover:border-emerald-500/50">
+          <input type="radio" name="exam-q1" class="accent-emerald-500" checked>
+          <span>By strictly enforcing BGP route whitelisting & IP binding.</span>
+        </label>
+        <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 cursor-pointer hover:border-emerald-500/50">
+          <input type="radio" name="exam-q1" class="accent-emerald-500">
+          <span>By allowing unencrypted DNS queries to commercial CDNs.</span>
+        </label>
+      </div>
+    </div>
+
+    <button onclick="showToast('Answer Submitted ✅', 'success'); playSynthTone(700, 0.1);" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3.5 rounded-xl text-xs active:scale-95 transition-all">
+      Submit Answer
     </button>
   </div>
 
-  <!-- ================= SCREEN 6: MESRS PROCTORED EXAM PORTAL ================= -->
-  <div id="screen-exam" class="app-screen justify-between">
-    <div class="space-y-3">
-      <!-- AI Proctoring Badge -->
-      <div class="bg-cyan-950/60 border border-cyan-500/40 rounded-xl p-3 flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <div class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></div>
-          <div>
-            <div class="text-xs font-bold text-cyan-300">AI Proctoring Active</div>
-            <div class="text-[10px] text-slate-400">1 Face Detected • Zero Foreign Leaks</div>
-          </div>
-        </div>
-        <span class="text-xs font-mono text-cyan-400 bg-cyan-500/20 px-2 py-1 rounded-md">LIVE</span>
-      </div>
-
-      <div class="glass-card p-4 space-y-2">
-        <div class="flex justify-between items-center text-xs text-slate-400 font-mono">
-          <span>USTHB - COMPUTER SCIENCE</span>
-          <span>TIME: 44:12</span>
-        </div>
-        <h3 class="text-sm font-bold text-white">Final Exam: Sovereign Network Security Architecture</h3>
-      </div>
-
-      <!-- Exam Question View -->
-      <div class="glass-card p-4 space-y-3">
-        <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">Question 1 of 10</span>
-        <p class="text-xs text-slate-200 leading-relaxed">
-          How does establishing an e-KYC verified BGP tunnel prevent man-in-the-middle attacks on state services when accessed from outside the sovereign territory?
-        </p>
-
-        <div class="space-y-2 pt-2">
-          <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 cursor-pointer hover:border-emerald-500/50">
-            <input type="radio" name="exam-q1" class="accent-emerald-500">
-            <span>By strictly enforcing BGP route whitelisting & IP binding.</span>
-          </label>
-          <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 cursor-pointer hover:border-emerald-500/50">
-            <input type="radio" name="exam-q1" class="accent-emerald-500">
-            <span>By allowing unencrypted DNS queries to commercial CDNs.</span>
-          </label>
-        </div>
-      </div>
-    </div>
-
-    <div class="space-y-2 mt-4">
-      <button onclick="showToast('Answer Saved Securely ✅', 'success'); playSynthTone(700, 0.1);" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3.5 rounded-xl text-xs active:scale-95">
-        Submit Answer
-      </button>
-      <button onclick="navigateTo('screen-dashboard')" class="w-full glass-card text-slate-400 text-xs font-semibold py-3 rounded-xl">
-        Exit Exam Session
-      </button>
-    </div>
-  </div>
-
-  <!-- ================= BOTTOM SHEET MODAL: e-KYC VERIFICATION ================= -->
+  <!-- ================= BOTTOM SHEET MODALS ================= -->
+  <!-- e-KYC VERIFICATION MODAL -->
   <div id="modal-ekyc-sheet" class="bottom-sheet">
     <div class="w-12 h-1 bg-slate-700 rounded-full mx-auto mb-4"></div>
     <h3 class="text-base font-bold text-white mb-1">Authenticating Identity</h3>
@@ -633,16 +758,12 @@
 
     <div class="space-y-3 font-mono text-xs">
       <div id="step-nfc" class="flex items-center justify-between p-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-400">
-        <span>1. ICAO Passport NFC Scan</span>
+        <span id="step-nfc-title">1. Biometric Hash Verification</span>
         <span id="step-nfc-status">⏳ SCANNING</span>
       </div>
       <div id="step-face" class="flex items-center justify-between p-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-400">
-        <span>2. Biometric Facial Liveness</span>
+        <span>2. Civil Registry Match</span>
         <span id="step-face-status">⏸ WAITING</span>
-      </div>
-      <div id="step-sync" class="flex items-center justify-between p-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-400">
-        <span>3. Civil Registry Approval</span>
-        <span id="step-sync-status">⏸ WAITING</span>
       </div>
     </div>
 
@@ -651,7 +772,7 @@
     </button>
   </div>
 
-  <!-- ================= BOTTOM SHEET MODAL: BARIDIMOB RECEIPT ================= -->
+  <!-- RECEIPT MODAL -->
   <div id="modal-receipt-sheet" class="bottom-sheet">
     <div class="w-12 h-1 bg-slate-700 rounded-full mx-auto mb-4"></div>
     <div class="text-center space-y-1">
@@ -673,19 +794,14 @@
         <span>TX HASH:</span>
         <span id="receipt-hash" class="text-cyan-400 text-[10px]">0x8f2a...91b4</span>
       </div>
-      <div class="flex justify-between text-slate-400">
-        <span>TIMESTAMP:</span>
-        <span id="receipt-time" class="text-slate-300">2026-09-30 11:07</span>
-      </div>
 
-      <!-- Canvas Dynamic QR Code -->
       <div class="pt-2 flex flex-col items-center">
         <canvas id="qrCanvas" width="100" height="100" class="bg-white p-1 rounded-lg border border-slate-300"></canvas>
         <span class="text-[9px] text-slate-500 mt-1">Official Digital Stamp</span>
       </div>
     </div>
 
-    <button onclick="closeReceiptSheet()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl text-xs active:scale-95">
+    <button onclick="closeReceiptSheet()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs active:scale-95">
       Done & Return
     </button>
   </div>
@@ -693,16 +809,16 @@
 </div>
 
 <script>
-  /* ================= APP STATE MANAGEMENT ================= */
+  /* Application State */
   let isGatewayActive = false;
   let isCameraActive = false;
   let videoStream = null;
   let audioCtx = null;
-  let latencyHistory = [18, 19, 17, 20, 18, 16, 19, 21, 18, 17, 18, 19];
+  let latencyHistory = [18, 19, 17, 20, 18, 16, 19, 21, 18, 17];
   let ccpBalance = 245000.00;
   let isBalanceVisible = true;
 
-  /* ================= WEB AUDIO SYNTHESIZER ================= */
+  /* Web Audio Synthesizer */
   function playSynthTone(freq, duration) {
     try {
       if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -716,10 +832,10 @@
       gain.connect(audioCtx.destination);
       osc.start();
       osc.stop(audioCtx.currentTime + duration);
-    } catch(e) { /* Audio context locked until click */ }
+    } catch(e) {}
   }
 
-  /* ================= SCREEN NAVIGATION ================= */
+  /* Navigation Handler */
   function navigateTo(screenId) {
     document.querySelectorAll('.app-screen').forEach(s => s.classList.remove('active'));
     const target = document.getElementById(screenId);
@@ -727,26 +843,68 @@
       target.classList.add('active');
       target.scrollTop = 0;
     }
-    // Stop camera if leaving eKYC
     if (screenId !== 'screen-ekyc' && isCameraActive) {
       stopCamera();
     }
   }
 
-  /* ================= TOAST SYSTEM ================= */
+  /* Toast Notification */
   function showToast(message, type = 'info') {
     const toast = document.getElementById('toast');
-    const toastText = document.getElementById('toast-text');
-    const toastIcon = document.getElementById('toast-icon');
-
-    toastText.innerText = message;
-    toastIcon.innerText = type === 'success' ? '✅' : type === 'error' ? '🚫' : '🛡️';
+    document.getElementById('toast-text').innerText = message;
+    document.getElementById('toast-icon').innerText = type === 'success' ? '✅' : type === 'error' ? '🚫' : '🛡️';
 
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 3000);
   }
 
-  /* ================= REAL WEBCAM HANDLER ================= */
+  /* e-KYC Tab Switcher */
+  function switchKycTab(tab) {
+    playSynthTone(500, 0.05);
+    const pBtn = document.getElementById('tab-btn-passport');
+    const fBtn = document.getElementById('tab-btn-fingerprint');
+    const pView = document.getElementById('kyc-view-passport');
+    const fView = document.getElementById('kyc-view-fingerprint');
+
+    if (tab === 'passport') {
+      pBtn.className = 'py-2 text-xs font-bold rounded-lg text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 transition-all';
+      fBtn.className = 'py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-white transition-all';
+      pView.classList.remove('hidden');
+      fView.classList.add('hidden');
+    } else {
+      fBtn.className = 'py-2 text-xs font-bold rounded-lg text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 transition-all';
+      pBtn.className = 'py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-white transition-all';
+      fView.classList.remove('hidden');
+      pView.classList.add('hidden');
+    }
+  }
+
+  /* Fingerprint Scanner Simulation */
+  function simulateFingerprintScan() {
+    const target = document.getElementById('fp-target');
+    const label = document.getElementById('fp-status-label');
+    const hashEl = document.getElementById('fp-hash-val');
+
+    playSynthTone(600, 0.1);
+    target.classList.add('scanning');
+    label.innerText = 'SCANNING TOUCH ID...';
+    label.className = 'text-xs font-mono font-bold text-amber-400';
+
+    if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
+
+    setTimeout(() => {
+      playSynthTone(900, 0.2);
+      target.classList.remove('scanning');
+      const randomHash = 'BIO-' + Math.random().toString(16).substr(2, 8).toUpperCase();
+      hashEl.innerText = randomHash;
+      label.innerText = 'TOUCH ID MATCHED ✅';
+      label.className = 'text-xs font-mono font-bold text-emerald-400';
+
+      executeBiometricScan('Touch ID Fingerprint (' + randomHash + ')');
+    }, 1500);
+  }
+
+  /* Real Camera Handler */
   async function toggleCamera() {
     const video = document.getElementById('webcam-feed');
     const graphic = document.getElementById('scanner-graphic');
@@ -760,9 +918,9 @@
         graphic.classList.add('hidden');
         isCameraActive = true;
         btnText.innerText = 'Disable Camera';
-        showToast('Webcam Feed Enabled', 'success');
+        showToast('Camera Feed Active', 'success');
       } catch (err) {
-        showToast('Camera Permission Denied (Using Fallback)', 'error');
+        showToast('Camera Unavailable (Using NFC Fallback)', 'info');
       }
     } else {
       stopCamera();
@@ -784,188 +942,146 @@
     btnText.innerText = 'Enable Camera';
   }
 
-  /* ================= e-KYC BIOMETRIC SCAN DRAWER ================= */
-  function executeBiometricScan() {
+  /* Biometric Drawer Execution */
+  function executeBiometricScan(typeLabel) {
     playSynthTone(700, 0.15);
     const sheet = document.getElementById('modal-ekyc-sheet');
     sheet.classList.add('open');
 
+    document.getElementById('step-nfc-title').innerText = '1. ' + typeLabel;
     const s1 = document.getElementById('step-nfc-status');
     const s2 = document.getElementById('step-face-status');
-    const s3 = document.getElementById('step-sync-status');
     const btn = document.getElementById('ekyc-close-btn');
 
     s1.innerHTML = '⏳ SCANNING...';
     s1.className = 'text-amber-400 font-bold';
     s2.innerHTML = '⏸ WAITING';
     s2.className = 'text-slate-500';
-    s3.innerHTML = '⏸ WAITING';
-    s3.className = 'text-slate-500';
     btn.disabled = true;
-    btn.className = 'w-full mt-5 bg-slate-800 text-slate-500 font-bold py-3.5 rounded-xl text-xs transition-all';
-    btn.innerText = 'Verifying...';
 
     setTimeout(() => {
-      playSynthTone(800, 0.1);
+      playSynthTone(850, 0.1);
       s1.innerHTML = '✅ OK';
       s1.className = 'text-emerald-400 font-bold';
-      s2.innerHTML = '⏳ MATCHING...';
+      s2.innerHTML = '⏳ SYNCING...';
       s2.className = 'text-amber-400 font-bold';
     }, 1200);
 
     setTimeout(() => {
-      playSynthTone(900, 0.1);
-      s2.innerHTML = '✅ 99.8% MATCH';
-      s2.className = 'text-emerald-400 font-bold';
-      s3.innerHTML = '⏳ SYNCING...';
-      s3.className = 'text-amber-400 font-bold';
-    }, 2400);
-
-    setTimeout(() => {
       playSynthTone(1000, 0.2);
-      s3.innerHTML = '✅ CERTIFIED';
-      s3.className = 'text-emerald-400 font-bold';
+      s2.innerHTML = '✅ CERTIFIED';
+      s2.className = 'text-emerald-400 font-bold';
       btn.disabled = false;
       btn.className = 'w-full mt-5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl text-xs shadow-lg shadow-emerald-500/20 active:scale-95 transition-all';
-      btn.innerText = 'Enter Sovereign Dashboard';
-      appendLog('Identity certified via Civil Registry Sync.');
-    }, 3600);
+      btn.innerText = 'Proceed to Sovereign Console';
+    }, 2400);
   }
 
   function closeEkycSheet() {
     document.getElementById('modal-ekyc-sheet').classList.remove('open');
-    navigateTo('screen-dashboard');
-    showToast('Biometric Access Granted', 'success');
+    navigateTo('screen-dashboard-off');
+    showToast('Biometric Identity Certified', 'success');
   }
 
-  /* ================= SOVEREIGN GATEWAY TUNNEL TOGGLE ================= */
-  function toggleGatewayTunnel() {
-    const btn = document.getElementById('power-btn');
-    const label = document.getElementById('power-btn-label');
-    const title = document.getElementById('tunnel-title');
-    const ip = document.getElementById('tunnel-ip');
-    const pill = document.getElementById('status-pill');
+  /* Connection Toggle Handler */
+  function toggleGatewayConnection() {
+    const btn = document.getElementById('power-btn-off');
+    const label = document.getElementById('power-off-label');
 
-    isGatewayActive = !isGatewayActive;
+    playSynthTone(400, 0.1);
+    btn.classList.add('connecting');
+    label.innerText = 'CONNECTING TO ALGIERS...';
+    label.className = 'text-xs text-amber-400 font-bold';
 
-    if (isGatewayActive) {
-      playSynthTone(300, 0.1);
-      setTimeout(() => playSynthTone(800, 0.2), 150);
-
-      btn.classList.add('active');
-      label.innerText = 'Sovereign Tunnel Active';
-      label.className = 'text-xs text-emerald-400 font-bold mt-1';
-      title.innerText = 'Algeria Sovereign Subnet';
-      title.className = 'text-base font-bold text-emerald-400 mt-0.5';
-      ip.innerText = '📍 Algiers Core Node (105.101.42.12)';
-      pill.className = 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1';
-      pill.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Protected';
-
-      showToast('WireGuard Handshake Established', 'success');
-      appendLog('Encrypted tunnel active: AES-256-GCM / WireGuard.');
-    } else {
-      playSynthTone(400, 0.15);
-
-      btn.classList.remove('active');
-      label.innerText = 'Tap to Establish Sovereign Tunnel';
-      label.className = 'text-xs text-slate-400 font-medium mt-1';
-      title.innerText = 'Open Foreign Network';
-      title.className = 'text-base font-bold text-red-400 mt-0.5';
-      ip.innerText = '📍 Paris Node (185.12.98.4)';
-      pill.className = 'bg-red-500/20 text-red-400 border border-red-500/30 text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1';
-      pill.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-red-400"></span> Restricted';
-
-      showToast('Gateway Disconnected', 'info');
-      appendLog('Tunnel disconnected. Reverted to open internet.');
-    }
+    setTimeout(() => {
+      btn.classList.remove('connecting');
+      isGatewayActive = true;
+      navigateTo('screen-dashboard-on');
+      showToast('Sovereign Tunnel Active (Algiers IP)', 'success');
+      appendLog('WireGuard Tunnel established to Algiers Core.');
+    }, 1200);
   }
 
-  /* ================= CANVAS 1: TOPOLOGY MAP ANIMATION ================= */
+  /* Topology Map Canvas */
   function initTopoCanvas() {
     const canvas = document.getElementById('topoCanvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
-    let packets = [
-      { progress: 0, speed: 0.01 },
-      { progress: 0.4, speed: 0.012 },
-      { progress: 0.7, speed: 0.009 }
-    ];
+    let packets = [{ p: 0 }, { p: 0.33 }, { p: 0.66 }];
 
     function render() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      const p1 = { x: 35, y: 35, label: 'Paris' };
-      const p2 = { x: 175, y: 75, label: 'Fiber Cable' };
-      const p3 = { x: 315, y: 35, label: 'Algiers' };
+      const p1 = { x: 30, y: 30, label: 'Paris' };
+      const p2 = { x: 175, y: 70, label: 'Subsea Cable' };
+      const p3 = { x: 320, y: 30, label: 'Algiers' };
 
-      // Draw Connection Arcs
+      // Line
       ctx.beginPath();
       ctx.moveTo(p1.x, p1.y);
-      ctx.quadraticCurveTo(100, 90, p2.x, p2.y);
-      ctx.quadraticCurveTo(250, 90, p3.x, p3.y);
-      ctx.strokeStyle = isGatewayActive ? 'rgba(16, 185, 129, 0.5)' : 'rgba(239, 68, 68, 0.25)';
-      ctx.lineWidth = 2;
-      ctx.setLineDash([4, 4]);
+      ctx.quadraticCurveTo(100, 80, p2.x, p2.y);
+      ctx.quadraticCurveTo(250, 80, p3.x, p3.y);
+      ctx.strokeStyle = '#10b981';
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([3, 3]);
       ctx.stroke();
       ctx.setLineDash([]);
 
-      // Draw Animated Packets
-      packets.forEach(p => {
-        p.progress += isGatewayActive ? p.speed * 2 : p.speed * 0.5;
-        if (p.progress > 1) p.progress = 0;
+      // Animated Packets
+      packets.forEach(pt => {
+        pt.p += 0.015;
+        if (pt.p > 1) pt.p = 0;
 
         let px, py;
-        if (p.progress < 0.5) {
-          let t = p.progress * 2;
+        if (pt.p < 0.5) {
+          let t = pt.p * 2;
           px = (1-t)*(1-t)*p1.x + 2*(1-t)*t*100 + t*t*p2.x;
-          py = (1-t)*(1-t)*p1.y + 2*(1-t)*t*90 + t*t*p2.y;
+          py = (1-t)*(1-t)*p1.y + 2*(1-t)*t*80 + t*t*p2.y;
         } else {
-          let t = (p.progress - 0.5) * 2;
+          let t = (pt.p - 0.5) * 2;
           px = (1-t)*(1-t)*p2.x + 2*(1-t)*t*250 + t*t*p3.x;
-          py = (1-t)*(1-t)*p2.y + 2*(1-t)*t*90 + t*t*p3.y;
+          py = (1-t)*(1-t)*p2.y + 2*(1-t)*t*80 + t*t*p3.y;
         }
 
         ctx.beginPath();
-        ctx.arc(px, py, 3.5, 0, Math.PI * 2);
-        ctx.fillStyle = isGatewayActive ? '#10b981' : '#ef4444';
+        ctx.arc(px, py, 3, 0, Math.PI * 2);
+        ctx.fillStyle = '#10b981';
         ctx.fill();
       });
 
       // Draw Nodes
       [p1, p2, p3].forEach((node, idx) => {
         ctx.beginPath();
-        ctx.arc(node.x, node.y, 6, 0, Math.PI * 2);
-        ctx.fillStyle = (idx === 2 && isGatewayActive) ? '#10b981' : '#1e293b';
-        ctx.strokeStyle = (idx === 2 && isGatewayActive) ? '#34d399' : '#64748b';
+        ctx.arc(node.x, node.y, 5, 0, Math.PI * 2);
+        ctx.fillStyle = idx === 2 ? '#10b981' : '#1e293b';
+        ctx.strokeStyle = idx === 2 ? '#34d399' : '#64748b';
         ctx.lineWidth = 2;
         ctx.fill();
         ctx.stroke();
 
         ctx.fillStyle = '#94a3b8';
         ctx.font = '9px monospace';
-        ctx.fillText(node.label, node.x - 18, node.y > 50 ? node.y + 16 : node.y - 10);
+        ctx.fillText(node.label, node.x - 16, node.y > 40 ? node.y + 14 : node.y - 8);
       });
 
-      document.getElementById('topoSpeed').innerText = isGatewayActive ? 'PACKETS: 120/s' : 'PACKETS: 12/s';
       requestAnimationFrame(render);
     }
     render();
   }
 
-  /* ================= CANVAS 2: SPARKLINE LATENCY CHART ================= */
+  /* Ping Chart Canvas */
   function initLatencyCanvas() {
     const canvas = document.getElementById('latencyCanvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
     setInterval(() => {
-      const newPing = isGatewayActive ? Math.floor(Math.random() * 5) + 16 : Math.floor(Math.random() * 15) + 45;
+      const newPing = Math.floor(Math.random() * 5) + 16;
       latencyHistory.push(newPing);
       if (latencyHistory.length > 20) latencyHistory.shift();
       document.getElementById('ping-text').innerText = newPing + ' ms';
 
-      // Draw Chart
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const w = canvas.width;
       const h = canvas.height;
@@ -974,18 +1090,17 @@
       ctx.beginPath();
       latencyHistory.forEach((val, i) => {
         const x = i * step;
-        const y = h - ((val - 10) / 50) * h;
+        const y = h - ((val - 10) / 40) * h;
         if (i === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
       });
 
-      ctx.strokeStyle = isGatewayActive ? '#10b981' : '#ef4444';
+      ctx.strokeStyle = '#10b981';
       ctx.lineWidth = 2;
       ctx.stroke();
-    }, 1000);
+    }, 1200);
   }
 
-  /* ================= TERMINAL SECURITY LOG FEED ================= */
   function appendLog(msg) {
     const box = document.getElementById('terminal-log');
     if (!box) return;
@@ -996,7 +1111,7 @@
     box.scrollTop = box.scrollHeight;
   }
 
-  /* ================= FIREWALL WHITELIST SANDBOX ================= */
+  /* Firewall Sandbox Inspector */
   function setTestUrl(url) {
     document.getElementById('test-url-input').value = url;
     runFirewallInspection();
@@ -1011,9 +1126,9 @@
 
     playSynthTone(600, 0.08);
     icon.innerText = '⚙️';
-    title.innerText = 'Inspecting Packet Header...';
+    title.innerText = 'Inspecting Request...';
     title.className = 'text-xs font-bold text-amber-400';
-    desc.innerText = 'Matching destination against DzLink Sovereign Whitelist database.';
+    desc.innerText = 'Checking domain against DzLink Sovereign Whitelist rules.';
 
     setTimeout(() => {
       const isWhitelisted = url.includes('baridimob.dz') || url.includes('mesrs.dz') || url.includes('douane.gov.dz');
@@ -1021,24 +1136,24 @@
       if (isWhitelisted) {
         playSynthTone(900, 0.15);
         icon.innerText = '✅';
-        title.innerText = 'FIREWALL ALLOW (Whitelisted Subnet)';
+        title.innerText = 'ALLOWED (Whitelisted Domain)';
         title.className = 'text-xs font-bold text-emerald-400';
-        desc.innerText = `Target domain [${url}] is certified. Encrypted traffic permitted through gateway.`;
+        desc.innerText = `Traffic to [${url}] is certified and passed through sovereign gateway.`;
         box.className = 'py-6 px-3 bg-emerald-950/30 rounded-xl border border-emerald-500/40 flex flex-col items-center justify-center space-y-2';
-        appendLog(`Firewall Rule ALLOWED: ${url}`);
+        appendLog(`Firewall Rule ALLOW: ${url}`);
       } else {
         playSynthTone(300, 0.2);
         icon.innerText = '🚫';
-        title.innerText = 'FIREWALL DROP (Exfiltration Risk)';
+        title.innerText = 'BLOCKED (Exfiltration Risk)';
         title.className = 'text-xs font-bold text-red-400';
-        desc.innerText = `Access to [${url}] is blocked. Foreign AI models and unverified endpoints are denied access.`;
+        desc.innerText = `Access to [${url}] is denied. Foreign AI endpoints and non-certified hosts are blocked.`;
         box.className = 'py-6 px-3 bg-red-950/30 rounded-xl border border-red-500/40 flex flex-col items-center justify-center space-y-2';
-        appendLog(`Firewall Rule BLOCKED: ${url} (Unauthorized External Domain)`);
+        appendLog(`Firewall Rule BLOCKED: ${url}`);
       }
-    }, 1000);
+    }, 900);
   }
 
-  /* ================= BARIDIMOB BANKING & RECEIPT ================= */
+  /* BaridiMob Balance Toggle & Transfer */
   function toggleBalanceBlur() {
     isBalanceVisible = !isBalanceVisible;
     const el = document.getElementById('ccp-balance-text');
@@ -1053,31 +1168,22 @@
     const amtInput = document.getElementById('transfer-amount');
     const amt = parseFloat(amtInput.value);
 
-    if (isNaN(amt) || amt <= 0) {
-      showToast('Enter a valid amount', 'error');
-      return;
-    }
-
-    if (amt > ccpBalance) {
-      showToast('Insufficient CCP Balance', 'error');
+    if (isNaN(amt) || amt <= 0 || amt > ccpBalance) {
+      showToast('Invalid Amount or Insufficient Funds', 'error');
       return;
     }
 
     playSynthTone(800, 0.15);
     ccpBalance -= amt;
     toggleBalanceBlur();
-    toggleBalanceBlur(); // refresh view
+    toggleBalanceBlur();
 
-    // Populate Receipt
     document.getElementById('receipt-amt').innerText = amt.toLocaleString('en-US', { minimumFractionDigits: 2 }) + ' DZD';
     document.getElementById('receipt-hash').innerText = '0x' + Math.random().toString(16).substr(2, 8) + '...dz';
     
-    // Draw QR Code on Canvas
     drawReceiptQR();
-
-    // Open Sheet
     document.getElementById('modal-receipt-sheet').classList.add('open');
-    appendLog(`Algérie Poste TX Completed: ${amt} DZD.`);
+    appendLog(`RIP Transfer Processed: ${amt} DZD`);
   }
 
   function drawReceiptQR() {
@@ -1087,7 +1193,6 @@
     ctx.clearRect(0, 0, 100, 100);
     ctx.fillStyle = '#000';
 
-    // Simple pseudo QR grid pattern
     for (let x = 0; x < 100; x += 10) {
       for (let y = 0; y < 100; y += 10) {
         if (Math.random() > 0.45 || (x < 30 && y < 30) || (x > 70 && y < 30) || (x < 30 && y > 70)) {
@@ -1099,22 +1204,19 @@
 
   function closeReceiptSheet() {
     document.getElementById('modal-receipt-sheet').classList.remove('open');
-    navigateTo('screen-dashboard');
-    showToast('Transaction Finalized', 'success');
+    navigateTo('screen-dashboard-on');
+    showToast('Transaction Completed Successfully', 'success');
   }
 
-  /* ================= INITIALIZATION ================= */
+  /* Window Load Initializer */
   window.onload = function() {
     initTopoCanvas();
     initLatencyCanvas();
-    
-    // Update live clock
+
     setInterval(() => {
       const now = new Date();
       document.getElementById('pwa-time').innerText = now.toTimeString().substr(0, 5);
     }, 1000);
-
-    appendLog('DzLink Gateway initialized in Sovereign Mode.');
   };
 </script>
 </body>
